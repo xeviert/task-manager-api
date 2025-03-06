@@ -28,6 +28,9 @@ export class TaskHistory {
   })
   newStatus: TaskStatus;
 
+  @Column({ type: 'text', nullable: true })
+  changeReason: string;
+
   @CreateDateColumn()
   changedAt: Date;
 

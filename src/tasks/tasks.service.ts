@@ -39,6 +39,8 @@ export class TasksService {
       const taskHistory = new TaskHistory();
       taskHistory.oldStatus = task.status;
       taskHistory.newStatus = updateTaskDto.status;
+      taskHistory.changeReason =
+        updateTaskDto.changeReason || 'No reason provided';
       taskHistory.task = task;
 
       await this.taskHistoryRepository.save(taskHistory);
