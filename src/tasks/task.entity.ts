@@ -4,13 +4,11 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  DeleteDateColumn,
+  OneToMany,
 } from 'typeorm';
-
-export enum TaskStatus {
-  PENDING = 'pending',
-  IN_PROGRESS = 'in-progress',
-  COMPLETED = 'completed',
-}
+import { TaskHistory } from './task-history.entity';
+import { TaskStatus } from './task-status.enum';
 
 @Entity()
 export class Task {
@@ -23,7 +21,12 @@ export class Task {
   @Column({ type: 'text', nullable: true })
   description: string;
 
-  @Column({ type: 'enum', enum: TaskStatus, default: TaskStatus.PENDING })
+  @Column({
+    type: 'enum',
+    enum: TaskStatus,
+    enumName: 'task_status_enum',
+    default: TaskStatus.PENDING,
+  })
   status: TaskStatus;
 
   @CreateDateColumn()
@@ -31,4 +34,10 @@ export class Task {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
+
+  @OneToMany(() => TaskHistory, (history) => history.task)
+  history: TaskHistory[];
 }

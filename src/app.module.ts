@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Task } from './tasks/task.entity';
 import { TasksModule } from './tasks/tasks.module';
+import { Task } from './tasks/task.entity';
+import { TaskHistory } from './tasks/task-history.entity';
 
 @Module({
   imports: [
@@ -12,11 +13,11 @@ import { TasksModule } from './tasks/tasks.module';
       username: 'postgres',
       password: 'postgres',
       database: 'werq-task-manager',
-      entities: [Task],
+      entities: [Task, TaskHistory],
       synchronize: true,
+      logging: ['schema'],
     }),
     TasksModule,
-    // We'll add the TasksModule here later
   ],
 })
 export class AppModule { }
