@@ -14,7 +14,7 @@ import { TaskHistory } from './tasks/task-history.entity';
       password: 'postgres',
       database: 'werq-task-manager',
       entities: [Task, TaskHistory],
-      synchronize: true,
+      synchronize: false,
       logging: ['schema'],
     }),
     TasksModule,

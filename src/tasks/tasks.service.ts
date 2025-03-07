@@ -50,7 +50,14 @@ export class TasksService {
     return this.taskRepository.save(task);
   }
 
-  async remove(id: string): Promise<void> {
-    await this.taskRepository.softDelete(id);
+  async remove(id: string): Promise<Task> {
+    const task = await this.taskRepository.findOne({ where: { id } });
+
+    if (!task) {
+      throw new NotFoundException(`Task with ID ${id} not found`);
+    }
+
+    task.deletedAt = new Date();
+    return this.taskRepository.save(task);
   }
 }
