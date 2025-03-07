@@ -27,6 +27,18 @@
 
 ## Project setup
 
+Set up .env.local file
+
+```bash
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USERNAME=[username]
+DATABASE_PASSWORD=[password]
+DATABASE_NAME=[werq-task-manager]
+PORT=8080
+CORS_ORIGIN=http://localhost:3000
+```
+
 ```bash
 $ npm install
 ```
